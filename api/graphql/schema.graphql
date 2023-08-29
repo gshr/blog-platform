@@ -1,0 +1,76 @@
+type User {
+    id: Int
+    username: String
+    email: String
+    posts: [Post]
+    comments: [PostComment]
+}
+
+type Post {
+    id: Int
+    title: String
+    content: String
+    author: User
+    created_at: String
+    updated_at: String
+    comments: [PostComment]
+}
+
+type PostComment {
+    id: Int
+    post: Post
+    author: User
+    content: String
+    update_date: String
+    create_date: String
+}
+
+type Mutation {
+    deletePost(id: Int!): DeletePostResponse
+    createPost(title: String!, content: String!): CreatePostResponse
+    updatePost(id: Int!, title: String!, content: String!): UpdatePostResponse
+    createComment(postId: Int!, content: String!): CreateCommentResponse
+    updateComment(id: Int!, content: String!): UpdateCommentResponse
+    deleteComment(id: Int!): DeleteCommentResponse
+}
+
+type UpdatePostResponse {
+    success: Boolean
+    message: String
+}
+
+type DeletePostResponse {
+    success: Boolean
+    message: String
+}
+
+type CreatePostResponse {
+    success: Boolean
+    message: String
+    post: Post
+}
+
+type CreateCommentResponse {
+    success: Boolean
+    message: String
+    comment: PostComment
+}
+
+type UpdateCommentResponse {
+    success: Boolean
+    message: String
+}
+
+type DeleteCommentResponse {
+    success: Boolean
+    message: String
+}
+
+type Query {
+    users: [User]
+    posts: [Post]
+    post(id: Int!): Post
+    user(id: Int!): User
+    comments: [PostComment]
+    comment(id: Int!): PostComment
+}
