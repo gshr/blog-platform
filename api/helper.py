@@ -29,7 +29,7 @@ def create_post(title: str, content: str, user, db):
     post1 = Post(title=title, content=content, author=user)
     db.add(post1)
     db.commit()
-    db.close()
+    db.refresh(post1)
     return {
         "success": True,
         "message": "Post created successfully",

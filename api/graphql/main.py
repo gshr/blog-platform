@@ -12,6 +12,7 @@ router = APIRouter(
     tags=['GraphQL']
 )
 
+
 type_defs = gql(open("api/graphql/schema.graphql").read())
 
 query = ObjectType("Query")
