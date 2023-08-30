@@ -2,7 +2,7 @@ from ariadne import ObjectType, gql, make_executable_schema, graphql_sync
 from fastapi.responses import JSONResponse
 from fastapi import APIRouter, Depends, Request
 from ..helper import create_comment, get_all_posts, get_post_by_id, delete_post, get_all_users, get_user_by_id, \
-    create_post, update_post, update_comment, delete_comment
+    create_post, update_post, update_comment, delete_comment, get_comment_by_id
 from api.models.models import *
 from api.authentication.auth import current_user
 from api.models.db import get_db
@@ -83,6 +83,14 @@ def resolve_delete_comment(_, info, id):
     user = context["currentuser"]
     db = context['db']
     return delete_comment(id, user, db)
+
+
+@query.field("comment")
+def resolve_get_comment(_, info, id):
+    context = info.context
+    user = context["currentuser"]
+    db = context['db']
+    return get_comment_by_id(id, db)
 
 
 schema = make_executable_schema(type_defs, query, mutation)

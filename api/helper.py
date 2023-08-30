@@ -16,6 +16,11 @@ def get_user_by_id(id: int, db: Session = SessionLocal()):
     return post
 
 
+def get_comment_by_id(id: int, db):
+    comment = db.query(PostComment).filter(PostComment.id == id).first()
+    return comment
+
+
 def delete_post(id: int, currentuser: User, db: Session = SessionLocal()):
     post = db.query(Post).filter(Post.id == id).first()
     if post:

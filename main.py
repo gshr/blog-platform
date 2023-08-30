@@ -22,7 +22,7 @@ def add_dummy_data():
     user1 = User(username="user1", email="user1@example.com", password="password1")
     user2 = User(username="user2", email="user2@example.com", password="password2")
     db.add(user1)
-    db.add(user2)
+
 
     post1 = Post(title="Post 1", content="Content for post 1", author=user1)
     post2 = Post(title="Post 2", content="Content for post 2", author=user2)

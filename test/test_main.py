@@ -86,7 +86,6 @@ def test_get_post_by_id():
     data = {
         "query": query
     }
-
     response = client.post('/', headers=headers, json=data)
     print(response.json())
     assert response.status_code == 200
