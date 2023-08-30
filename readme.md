@@ -63,4 +63,42 @@ query Posts {
         updated_at
     }
 }
+````
+
+- Get all Posts comment under those post and their author
+
+````
+query Posts {
+    posts {
+        id
+        title
+        content
+        created_at
+        updated_at
+        comments {
+            id
+            content
+            update_date
+            create_date
+            author {
+                id
+                username
+                email
+            }
+        }
+    }
+}
+````
+
+- Comment Under  a post 
+
+````
+mutation CreateComment {
+    createComment(postId: 1, content: "My Comment") {
+        success
+        message
+    }
+}
+
+````
 

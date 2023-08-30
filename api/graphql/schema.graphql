@@ -71,6 +71,6 @@ type Query {
     posts: [Post]
     post(id: Int!): Post
     user(id: Int!): User
-    comments: [PostComment]
+   #comments: [PostComment]
     comment(id: Int!): PostComment
 }

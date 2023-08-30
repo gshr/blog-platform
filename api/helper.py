@@ -21,18 +21,6 @@ def get_comment_by_id(id: int, db):
     return comment
 
 
-def delete_post(id: int, currentuser: User, db: Session = SessionLocal()):
-    post = db.query(Post).filter(Post.id == id).first()
-    if post:
-        if post.author_id != currentuser.id:
-            return {"success": False, "message": "You are not authorized to delete this post"}
-        db.delete(post)
-        db.commit()
-        return {"success": True, "message": "Post deleted successfully"}
-    else:
-        return {"success": False, "message": "Post not found"}
-
-
 def get_all_users(db: Session = SessionLocal()):
     return db.query(User).all()
 
@@ -109,12 +97,25 @@ def update_comment(id, content, user, db):
     }
 
 
-def delete_comment(id: int, currentuser: User, db):
+def delete_comment(id: int, currentuser, db):
     comment = db.query(PostComment).filter(PostComment.id == id).first()
     if comment:
         if comment.author != currentuser:
-            return {"success": False, "message": "You are not authorized to delete this post"}
+            return {"success": False, "message": "You are not authorized to delete this comment"}
         db.delete(comment)
+        db.commit()
+        return {"success": True, "message": "comment deleted successfully"}
+    else:
+        return {"success": False, "message": "comment not found"}
+
+
+def delete_post(id: int, currentuser, db):
+    post = db.query(Post).filter(Post.id == id).first()
+    if post:
+        print(post.author, currentuser)
+        if post.author != currentuser:
+            return {"success": False, "message": "You are not authorized to delete this post"}
+        db.delete(post)
         db.commit()
         return {"success": True, "message": "Post deleted successfully"}
     else:

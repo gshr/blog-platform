@@ -89,3 +89,4 @@ def test_get_post_by_id():
     response = client.post('/', headers=headers, json=data)
     print(response.json())
     assert response.status_code == 200
+

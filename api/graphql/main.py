@@ -42,7 +42,9 @@ def resolve_post(_, info, id: int):
 def resolve_delete_post(_, info, id: int):
     context = info.context
     user = context["currentuser"]
-    return delete_post(id, user)
+    db = context['db']
+    print(user)
+    return delete_post(id, user,db)
 
 
 @mutation.field("createPost")
