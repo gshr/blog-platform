@@ -46,7 +46,15 @@ token we will send with every request to validate user authorization for particu
 
 ![login.png](images%2Flogin.png)
 
+
 `` http://127.0.0.1:8000/login ``
+
+- Default Credentials
+
+```
+username : user0
+password : password0
+```
 
 -  Before sending request add this token in Bearer under authorization
 

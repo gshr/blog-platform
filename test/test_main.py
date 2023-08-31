@@ -156,6 +156,7 @@ def test_delete_invalid_post(auth_headers):
     assert response_json["data"]["deletePost"]["success"] is False
     assert response_json["data"]["deletePost"]["message"] == "Post not found"
 
+
 def test_delete_unauthorized_post(auth_headers):
     global post_id
     query = f'''mutation DeletePost {{
