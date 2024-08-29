@@ -10,7 +10,7 @@ DATABASE_URL = "sqlite:///./test.db"
 DATABASE = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
 Base = declarative_base()
-engine = create_engine(DATABASE_URL, connect_args={'check_same_thread': False})
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -48,6 +48,3 @@ class PostComment(Base):
     create_date = Column(DateTime, default=func.now())
     post = relationship("Post", back_populates="comments")
     author = relationship("User", back_populates="comments")
-
-
-

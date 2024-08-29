@@ -30,11 +30,7 @@ def create_post(title: str, content: str, user, db):
     db.add(post1)
     db.commit()
     db.refresh(post1)
-    return {
-        "success": True,
-        "message": "Post created successfully",
-        "post": post1
-    }
+    return {"success": True, "message": "Post created successfully", "post": post1}
 
 
 def update_post(id: int, title: str, content: str, user, db):
@@ -43,7 +39,10 @@ def update_post(id: int, title: str, content: str, user, db):
         return {"success": False, "message": "Post not found"}
 
     if post.author != user:
-        return {"success": False, "message": "You are not authorized to update this post"}
+        return {
+            "success": False,
+            "message": "You are not authorized to update this post",
+        }
 
     post.title = title
     post.content = content
@@ -57,11 +56,7 @@ def update_post(id: int, title: str, content: str, user, db):
 def create_comment(postId, content, user, db):
     post = db.query(Post).filter(Post.id == postId).first()
     if not post:
-        return {
-            "success": False,
-            "message": "Post not found",
-            "comment": None
-        }
+        return {"success": False, "message": "Post not found", "comment": None}
 
     new_comment = PostComment(post=post, content=content, author=user)
     db.add(new_comment)
@@ -69,7 +64,7 @@ def create_comment(postId, content, user, db):
     return {
         "success": True,
         "message": "Comment created successfully",
-        "comment": new_comment
+        "comment": new_comment,
     }
 
 
@@ -77,31 +72,28 @@ def update_comment(id, content, user, db):
     comment = db.query(PostComment).filter(PostComment.id == id).first()
 
     if not comment:
-        return {
-            "success": False,
-            "message": "Comment not found"
-        }
+        return {"success": False, "message": "Comment not found"}
 
     if comment.author != user:
         return {
             "success": False,
-            "message": "You are not authorized to update this comment"
+            "message": "You are not authorized to update this comment",
         }
 
     comment.content = content
     db.commit()
 
-    return {
-        "success": True,
-        "message": "Comment updated successfully"
-    }
+    return {"success": True, "message": "Comment updated successfully"}
 
 
 def delete_comment(id: int, currentuser, db):
     comment = db.query(PostComment).filter(PostComment.id == id).first()
     if comment:
         if comment.author != currentuser:
-            return {"success": False, "message": "You are not authorized to delete this comment"}
+            return {
+                "success": False,
+                "message": "You are not authorized to delete this comment",
+            }
         db.delete(comment)
         db.commit()
         return {"success": True, "message": "comment deleted successfully"}
@@ -114,7 +106,10 @@ def delete_post(id: int, currentuser, db):
     if post:
         print(post.author, currentuser)
         if post.author != currentuser:
-            return {"success": False, "message": "You are not authorized to delete this post"}
+            return {
+                "success": False,
+                "message": "You are not authorized to delete this post",
+            }
         db.delete(post)
         db.commit()
         return {"success": True, "message": "Post deleted successfully"}

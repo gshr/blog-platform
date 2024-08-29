@@ -17,20 +17,24 @@ app.include_router(router=user_router)
 #     finally:
 #         db.close()
 
+
 def add_dummy_data():
     from faker import Faker
+
     fake = Faker()
 
     db = SessionLocal()
 
     for i in range(5):
-            user1 = User(username=f"user{i}", email=f"user{i}@example.com", password=f"password{i}")
-            db.add(user1)
-            for j in range(20):
-                title = fake.sentence()
-                content = fake.paragraph()
-                post1 = Post(title=title, content=content, author=user1)
-                db.add(post1)
+        user1 = User(
+            username=f"user{i}", email=f"user{i}@example.com", password=f"password{i}"
+        )
+        db.add(user1)
+        for j in range(20):
+            title = fake.sentence()
+            content = fake.paragraph()
+            post1 = Post(title=title, content=content, author=user1)
+            db.add(post1)
     db.commit()
     db.close()
 
@@ -43,11 +47,12 @@ def add_dummy_data():
 # def fetch_posts(db: Session = Depends(get_db)):
 #     return db.query(Post).all()
 
+
 def create_tables():
     Base.metadata.create_all(bind=engine)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # create_tables()
     # add_dummy_data()
     import uvicorn
