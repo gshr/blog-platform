@@ -1,2 +1,8 @@
 [lint]
 select = ['ALL']
+
+ignore = ["S101",
+"ANN",
+"D",
+"PLR"
+]
