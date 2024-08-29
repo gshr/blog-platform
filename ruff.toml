@@ -4,5 +4,6 @@ select = ['ALL']
 ignore = ["S101",
 "ANN",
 "D",
-"PLR"
+"PLR",
+"COM812"
 ]
